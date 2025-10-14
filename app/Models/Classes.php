@@ -17,7 +17,7 @@ class Classes extends Model
     // relations with sections table
     public function sections(): HasMany
     {
-        return $this->hasMany(Section::class);
+        return $this->hasMany(Section::class, 'class_id');
     }
 
     // relations with students table

@@ -23,6 +23,6 @@ class Section extends Model
     // relationship with students table
     public function class(): BelongsTo
     {
-        return $this->BelongsTo(Classes::class);
+        return $this->BelongsTo(Classes::class, 'class_id');
     }
 }
