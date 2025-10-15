@@ -60,5 +60,5 @@ Route::middleware('auth')->group(function () {
 
 
     // livewire students route => FULL PAGE COMPONENT SYNTAX
-    Route::get('/students', ListStudent::class)->name('student-list');
+    Route::get('/students/index', ListStudent::class)->name('student.index');
 });

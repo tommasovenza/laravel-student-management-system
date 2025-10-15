@@ -1,8 +1,13 @@
 <div class="flex items-center justify-center min-h-screen bg-gray-100">
   <div>
+    {{--  --}}
+    <div class="container-button flex justify-end items-center w-full py-4">
+      <button class="bg-indigo-500 hover:bg-indigo-700 text-white py-2 px-4 rounded">Create</button>
+    </div>
+
     <div class="overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-gray-200 w-full flex items-center justify-center px-4">
       <table class="min-w-full text-sm text-gray-800">
-        <thead class="bg-slate-800 text-black">
+        <thead class="text-black">
           <tr>
             <th scope="col" class="py-3.5 pl-6 pr-3 text-left font-semibold">ID</th>
             <th scope="col" class="px-3 py-3.5 text-left font-semibold">Name</th>
@@ -45,7 +50,9 @@
       </table>
     </div>
     
-    <div class="mt-4">{{ $students->links() }}</div>
+    <div class="mt-4">
+      {{ $students->links() }}
+    </div>
   </div>
 </div>
 
