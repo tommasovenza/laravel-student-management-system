@@ -2,7 +2,7 @@
   <div>
     {{--  --}}
     <div class="container-button flex justify-end items-center w-full py-4">
-      <button class="bg-indigo-500 hover:bg-indigo-700 text-white py-2 px-4 rounded">Create</button>
+      <a href="{{ route('student.create') }}" as="button" class="bg-indigo-500 hover:bg-indigo-700 text-white py-2 px-4 rounded">Create</a>
     </div>
 
     <div class="overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-gray-200 w-full flex items-center justify-center px-4">
