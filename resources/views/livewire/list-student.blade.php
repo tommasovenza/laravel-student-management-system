@@ -103,7 +103,10 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="mt-5"> {{ $students->links() }}</div>
+                        {{-- Pagination --}}
+                        <div class="mt-5">
+                          {{ $students->links() }}
+                        </div>
                     </div>
                 </div>
             </div>
