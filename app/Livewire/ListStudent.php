@@ -9,7 +9,7 @@ use Livewire\Attributes\Layout;
 class ListStudent extends Component
 {
     // full component layout as explained in livewire 3 documentation
-    #[Layout('layouts.app')]
+    // #[Layout('layouts.app')]
 
     // render method
     public function render()
