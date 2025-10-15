@@ -27,6 +27,7 @@ export default {
       "hover:bg-green-700",
       "hover:bg-red-700",
       "text-white",
+      "text-red-500",
     ],
   },
 
