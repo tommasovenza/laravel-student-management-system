@@ -15,7 +15,7 @@ class EditStudent extends Component
     // set variables
     #[Validate('required|min:3')]
     public $name;
-    // #[Validate('required|email|unique:students,email')]
+    // removed validation for email here and moved inside updated function
     public $email;
     #[Validate('required')]
     public $class_id;
@@ -25,26 +25,23 @@ class EditStudent extends Component
     // iterable variable
     public $sections = [];
 
-    // this function hook takes in by route model binding the Student and makes dd()
-    // we can use this student to fill the form fields when 
+    // this function hook takes in by route model binding the Student
+    // we can use this student to fill the form fields when page is uploaded
     public function mount(Student $student)
     {
-        // dd($student);
         $this->name = $student->name;
         $this->email = $student->email;
         $this->class_id = $student->class_id;
         $this->sections = Section::where('id', $student->section_id)->get();
-
-        // dd($this->sections);
     }
 
-    // saving
-    public function editStudent(Student $student)
+    // Editing Student
+    public function editStudent()
     {
         // livewire validation
-        $this->validate(
-            // ["email" => 'required|email|unique:students,email']
-        );
+        $this->validate([
+            "email" => 'required|email|unique:students,email,' . $this->student->id
+        ]);
 
         // saving
         $this->student->update([
@@ -54,8 +51,7 @@ class EditStudent extends Component
             'section_id' => $this->section_id,
         ]);
 
-        // $this->post->update($this->all());
-
+        // redirect
         $this->redirect('/students/index');
     }
 
