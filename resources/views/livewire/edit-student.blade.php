@@ -16,9 +16,7 @@
                         <div class="grid grid-cols-6 gap-6">
                             <div class="col-span-6 sm:col-span-3">
                                 <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                                <input type="text" id="name" 
-                                {{-- wire:model="name" --}}
-                                    value="{{ $dataStudent->name }}"
+                                <input type="text" id="name" wire:model="name"
                                     class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm @error('name') text-red-900 focus:ring-red-500 focus:border-red-500 border-red-300 @enderror" />
                                 {{-- Error Message --}}
                                 @error('name')
@@ -29,9 +27,7 @@
                             <div class="col-span-6 sm:col-span-3">
                                 <label for="email" class="block text-sm font-medium text-gray-700">Email
                                     Address</label>
-                                <input type="email" id="email" autocomplete="email" 
-                                {{-- wire:model="email" --}}
-                                    value="{{ $dataStudent->email }}"
+                                <input type="email" id="email" autocomplete="email" wire:model="email"
                                     class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm @error('email') text-red-900 focus:ring-red-500 focus:border-red-500 border-red-300 @enderror" />
                                 {{-- Error Message --}}
                                 @error('email')

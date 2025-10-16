@@ -4,11 +4,14 @@ namespace App\Livewire;
 
 use App\Models\Classes;
 use App\Models\Student;
+use App\Models\Section;
 use Livewire\Component;
 use Livewire\Attributes\Validate;
 
 class EditStudent extends Component
 {
+
+    public Student $student;
     // set variables
     #[Validate('required|min:3')]
     public $name;
@@ -22,48 +25,51 @@ class EditStudent extends Component
     // iterable variable
     public $sections = [];
 
-    public $dataStudent;
-
     // this function hook takes in by route model binding the Student and makes dd()
-    // we can use this student to fill the form fields
+    // we can use this student to fill the form fields when 
     public function mount(Student $student)
     {
         // dd($student);
-        $this->dataStudent = $student;
+        $this->name = $student->name;
+        $this->email = $student->email;
+        $this->class_id = $student->class_id;
+        $this->sections = Section::where('id', $student->section_id)->get();
+
+        // dd($this->sections);
     }
 
     // saving
-    public function editStudent()
+    public function editStudent(Student $student)
     {
         // livewire validation
-        $this->validate([
-            "email" => 'required|email|unique:students,email'
-        ]);
-
-        dd("everything ok");
+        $this->validate(
+            // ["email" => 'required|email|unique:students,email']
+        );
 
         // saving
-        // Student::create([
-        //     'name' => $this->name,
-        //     'email' => $this->email,
-        //     'class_id' => $this->class_id,
-        //     'section_id' => $this->section_id,
-        // ]);
+        $this->student->update([
+            'name' => $this->name,
+            'email' => $this->email,
+            'class_id' => $this->class_id,
+            'section_id' => $this->section_id,
+        ]);
 
-        // $this->redirect('/students/index');
+        // $this->post->update($this->all());
+
+        $this->redirect('/students/index');
     }
 
     // update method that is hooked by wire:model.live on select's form element
-    // public function updatedClassId($value)
-    // {
-    //     // this sections is updated by this query
-    //     $this->sections = Section::where('class_id', $value)->get();
-    // }
+    public function updatedClassId($value)
+    {
+        // this sections is updated by this query
+        $this->sections = Section::where('class_id', $value)->get();
+    }
+
     public function render()
     {
         // return view with data
         return view('livewire.edit-student', [
-            'dataStudent' => $this->dataStudent,
             'classes' => Classes::all()
         ]);
     }
