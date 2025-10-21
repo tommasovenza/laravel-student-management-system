@@ -3,48 +3,36 @@
 namespace App\Livewire;
 
 use App\Models\Classes;
-use App\Models\Section;
-use App\Models\Student;
 use Livewire\Component;
 use Livewire\Attributes\Validate;
+use App\Livewire\Forms\CreateStudentForm;
 
 class CreateStudent extends Component
 {
     // set variables
-    #[Validate('required|min:3')]
-    public $name;
-    #[Validate('required|email|unique:students,email')]
-    public $email;
+    public CreateStudentForm $form;
+    
     #[Validate('required')]
     public $class_id;
-    #[Validate('required')]
-    public $section_id;
 
-    // iterable variable
-    public $sections = [];
+    // update method that is hooked by wire:model.live on select's form element
+    public function updatedClassId($value)
+    {
+        // update sections passing $class_id that is bind
+        $this->form->setSections($value);
+    }
 
-    // saving
+    // method called by form to save student
     public function save()
     {
         // livewire validation
         $this->validate();
 
-        // saving
-        Student::create([
-            'name' => $this->name,
-            'email' => $this->email,
-            'class_id' => $this->class_id,
-            'section_id' => $this->section_id,
-        ]);
+        // call method to store a student
+        $this->form->storeStudent($this->class_id);
 
-        $this->redirect('/students/index');
-    }
-
-    // update method that is hooked by wire:model.live on select's form element
-    public function updatedClassId($value)
-    {
-        // this sections is updated by this query
-        $this->sections = Section::where('class_id', $value)->get();
+        // redirect
+        return redirect()->route('student.index');
     }
 
     // Created component

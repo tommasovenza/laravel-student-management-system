@@ -4,7 +4,6 @@ namespace App\Livewire;
 
 use App\Models\Student;
 use Livewire\Component;
-use Livewire\Attributes\Layout;
 
 class ListStudent extends Component
 {
