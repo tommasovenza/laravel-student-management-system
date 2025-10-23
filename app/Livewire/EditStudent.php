@@ -3,63 +3,58 @@
 namespace App\Livewire;
 
 use App\Models\Classes;
-use App\Models\Student;
 use App\Models\Section;
+use App\Models\Student;
 use Livewire\Component;
 use Livewire\Attributes\Validate;
+use App\Livewire\Forms\UpdateStudentForm;
 
 class EditStudent extends Component
 {
-
+    public UpdateStudentForm $form;
     public Student $student;
-    // set variables
-    #[Validate('required|min:3')]
-    public $name;
-    // removed validation for email here and moved inside updated function
-    public $email;
+
     #[Validate('required')]
     public $class_id;
-    #[Validate('required')]
-    public $section_id;
-
-    // iterable variable
-    public $sections = [];
 
     // this function hook takes in by route model binding the Student
     // we can use this student to fill the form fields when page is uploaded
+    // public function mount(Student $student)
+    // {   
+    //     $this->form->name = $student->name;
+    //     $this->form->email = $student->email;
+    //     $this->class_id = $student->class_id;
+    //     $this->form->sections = Section::where('class_id', $student->class_id)->get();
+    // }
+
     public function mount(Student $student)
     {
-        $this->name = $student->name;
-        $this->email = $student->email;
+        $this->student = $student;
+
+        // Inizializza il form
+        // $this->form = new UpdateStudentForm();
+        $this->form->mount($student);
+
         $this->class_id = $student->class_id;
-        $this->sections = Section::where('id', $student->section_id)->get();
+        $this->form->sections = Section::where('class_id', $student->class_id)->get();
+    }
+
+
+    // update method that is hooked by wire:model.live on select's form element
+    public function updatedClassId($class_id)
+    {
+        // update sections passing $class_id that is bind
+        $this->form->setSections($class_id);
     }
 
     // Editing Student
-    public function editStudent()
+    public function edit()
     {
-        // livewire validation
-        $this->validate([
-            "email" => 'required|email|unique:students,email,' . $this->student->id
-        ]);
-
-        // saving
-        $this->student->update([
-            'name' => $this->name,
-            'email' => $this->email,
-            'class_id' => $this->class_id,
-            'section_id' => $this->section_id,
-        ]);
+        // updating
+        $this->form->updateStudent($this->class_id);
 
         // redirect
         $this->redirect('/students/index');
-    }
-
-    // update method that is hooked by wire:model.live on select's form element
-    public function updatedClassId($value)
-    {
-        // this sections is updated by this query
-        $this->sections = Section::where('class_id', $value)->get();
     }
 
     public function render()

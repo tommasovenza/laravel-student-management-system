@@ -16,10 +16,10 @@ class CreateStudent extends Component
     public $class_id;
 
     // update method that is hooked by wire:model.live on select's form element
-    public function updatedClassId($value)
+    public function updatedClassId($class_id)
     {
         // update sections passing $class_id that is bind
-        $this->form->setSections($value);
+        $this->form->setSections($class_id);
     }
 
     // method called by form to save student
