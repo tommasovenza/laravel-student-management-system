@@ -3,7 +3,6 @@
 namespace App\Livewire\Forms;
 
 use Livewire\Form;
-use App\Models\Section;
 use App\Models\Student;
 use Livewire\Attributes\Validate;
 
