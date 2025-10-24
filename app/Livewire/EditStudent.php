@@ -53,8 +53,8 @@ class EditStudent extends Component
         // updating
         $this->form->updateStudent($this->class_id);
 
-        // redirect
-        $this->redirect('/students/index');
+        // redirect using correct syntax for SPA Experience
+        $this->redirect('students.index', navigate:true);
     }
 
     public function render()

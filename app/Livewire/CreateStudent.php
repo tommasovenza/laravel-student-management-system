@@ -31,8 +31,8 @@ class CreateStudent extends Component
         // call method to store a student
         $this->form->storeStudent($this->class_id);
 
-        // redirect
-        return redirect()->route('student.index');
+        // redirect with correct syntax for SPA Experience
+        return $this->redirect('students.index', navigate: true);
     }
 
     // Created component
