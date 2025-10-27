@@ -3,14 +3,11 @@
 namespace App\Livewire\Forms;
 
 use Livewire\Form;
-use App\Models\Student;
 use Livewire\Attributes\Validate;
 
 class UpdateStudentForm extends Form
 {
-    //
-    public Student $student;
-
+    // using for updating
     #[Validate('required')]
     public $name;
 
@@ -24,6 +21,9 @@ class UpdateStudentForm extends Form
     // store a new student
     public function updateStudent($class_id, $student)
     {
+        // validate name and section id here
+        $this->validate();
+
         // update a new student
         $student->update([
             'name' => $this->name,

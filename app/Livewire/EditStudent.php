@@ -22,17 +22,12 @@ class EditStudent extends Component
     public $class_id;
 
     // call mount method
-    public function mount()
+    public function mount(Student $student)
     {
-        $this->form->name = $this->student->name;
-        $this->form->email = $this->student->email;
-        $this->class_id = $this->student->class_id;
-    }
-
-    // updatedClassId
-    public function updatedClassId($class_id)
-    {
-        $this->form->sections = Section::where('class_id', $class_id)->get();
+        $this->form->name = $student->name;
+        $this->form->email = $student->email;
+        $this->class_id = $student->class_id;
+        $this->form->sections = Section::where('class_id', $this->class_id)->get();
     }
 
     public function editStudent()
@@ -42,7 +37,7 @@ class EditStudent extends Component
             'form.email' => 'required|unique:students,email,' . $this->student->id
         ]);
 
-        // calling form function to Update
+        // calling form function updateStudent passing class_id and current student
         $this->form->updateStudent($this->class_id, $this->student);
 
         // redirect
