@@ -92,12 +92,10 @@
                                         <td
                                             class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
 
-                                            <a href="#" class="text-indigo-600 hover:text-indigo-900">
+                                            {{-- Edit --}}
+                                            <a href="{{ route('student.edit' , $student->id) }}" class="text-indigo-600 hover:text-indigo-900">
                                                 Edit
                                             </a>
-                                            {{-- <a href="{{ route('student.edit' , $student->id) }}" class="text-indigo-600 hover:text-indigo-900">
-                                                Edit
-                                            </a> --}}
                                             
                                             <button wire:confirm="Are you sure you want delete this Student?" wire:click="deleteStudent({{ $student->id }})" class="ml-2 text-indigo-600 hover:text-indigo-900">
                                                 Delete

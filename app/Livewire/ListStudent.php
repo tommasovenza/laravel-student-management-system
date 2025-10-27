@@ -15,15 +15,4 @@ class ListStudent extends Component
             'students' => Student::paginate()
         ]);
     }
-
-    // delete student resource
-    // public function deleteStudent($id) 
-    // {   
-    //     // find student to delete
-    //     Student::find($id)->delete();
-
-    //     // we need this syntax to make a correct redirect as a SPA Application
-    //     // return $this->redirect('students.index', navigate: true);
-    //     return redirect()->route('students.index');
-    // }
 }
