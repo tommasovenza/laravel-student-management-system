@@ -24,9 +24,13 @@ class EditStudent extends Component
     // call mount method
     public function mount(Student $student)
     {
+        // from temporary parameter to persistent Livewire property
+        $this->student = $student;
+
         $this->form->name = $student->name;
         $this->form->email = $student->email;
         $this->class_id = $student->class_id;
+        $this->form->section_id = $student->section_id;
         $this->form->sections = Section::where('class_id', $this->class_id)->get();
     }
 

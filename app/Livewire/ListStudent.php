@@ -15,4 +15,13 @@ class ListStudent extends Component
             'students' => Student::paginate()
         ]);
     }
+
+    public function deleteStudent($id)
+    {
+        $student = Student::find($id);
+
+        $student->delete();
+
+        return redirect()->route('students.index');
+    }
 }

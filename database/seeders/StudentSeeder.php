@@ -2,29 +2,40 @@
 
 namespace Database\Seeders;
 
-use Faker\Factory;
-use App\Models\Student;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Student;
+use App\Models\Section;
+use Faker\Factory;
 
 class StudentSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        //
-        // first cycle
-        for ($i = 1; $i <= 5; $i++) {
-            // second cycle
-            for ($j = 1; $j <= 10; $j++) {
-                $faker = Factory::create();
+        $faker = Factory::create();
+
+        // for each class (1..10)
+        for ($classId = 1; $classId <= 10; $classId++) {
+
+            // get sections belongs to this class
+            $sectionsForClass = Section::where('class_id', $classId)->pluck('id')->all();
+            // example: [5, 6]
+
+            // security: if for some reason there are no sections, skip
+            if (empty($sectionsForClass)) {
+                continue;
+            }
+
+            // create 5 students foreach class
+            for ($i = 0; $i < 5; $i++) {
+
+                // take a section that is valid for that class
+                $sectionId = $faker->randomElement($sectionsForClass);
+                // create
                 $student = new Student();
-                $student->class_id = $j;
-                $student->section_id = $i;
+                $student->class_id = $classId;
+                $student->section_id = $sectionId;
                 $student->name = $faker->name();
-                $student->email = $faker->email();
+                $student->email = $faker->unique()->safeEmail();
                 $student->save();
             }
         }
