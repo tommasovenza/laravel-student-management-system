@@ -105,6 +105,15 @@
                                   @endforeach
                                 </tbody>
                             </table>
+
+                            <div wire:loading class="absolute inset-0 bg-white opacity-50">
+                                {{-- layer with background white --}}
+                            </div>
+
+                            <div wire:loading.flex class="flex justify-center items-center absolute inset-0">
+                                <x-icons.spinner class="h-12 w-12 text-indigo-600" /> 
+                            </div>
+
                         </div>
                         {{-- Pagination --}}
                         <div class="mt-5">
