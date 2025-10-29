@@ -4,8 +4,9 @@ namespace App\Livewire;
 
 use App\Models\Student;
 use Livewire\Component;
-use Illuminate\Contracts\Database\Eloquent\Builder;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class ListStudent extends Component
 {
@@ -15,20 +16,47 @@ class ListStudent extends Component
     // search
     public string $search = '';
 
+    public $column = 'id';
+
+    public $direction = 'desc';
+
+    public function sort($columnToSort)
+    {
+        if ($this->column === $columnToSort) {
+            // set this direction
+            $this->direction = $this->direction === 'desc' ? 'asc' : 'desc';
+        } else {
+            // change column
+            $this->column = $columnToSort;
+            $this->direction = $this->direction === 'desc' ? 'asc' : 'desc';
+        }
+        // log
+        logger("column passed: {$columnToSort}");
+        logger("column var: {$this->column}");
+        logger("direction: {$this->direction}");
+        // 
+        $this->resetPage();
+    }
+
     // render method
     public function render()
     {
+        // create a query builder instance
         $students = Student::query();
 
+        // using it to filter if wire:model search is changing
         $students = $students->where(function (Builder $query) {
             $query->where('name', 'like', '%' . $this->search . '%')
                 ->orWhere('email', 'like', '%' . $this->search . '%');
-        })
-            ->paginate(10);
+        });
 
+        // trying implementing an order/sortColumn function
+        $students->orderBy($this->column, $this->direction);
+
+        // returning view
         return view('livewire.list-student', [
             // passing data to view
-            'students' => $students
+            'students' => $students->paginate(10)
         ]);
     }
 
