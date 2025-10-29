@@ -5,10 +5,14 @@ namespace App\Livewire;
 use App\Models\Student;
 use Livewire\Component;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Livewire\WithPagination;
 
 class ListStudent extends Component
 {
-    // search functionality to implement
+
+    use WithPagination;
+
+    // search
     public string $search = '';
 
     // render method
@@ -20,7 +24,7 @@ class ListStudent extends Component
             $query->where('name', 'like', '%' . $this->search . '%')
                 ->orWhere('email', 'like', '%' . $this->search . '%');
         })
-            ->paginate();
+            ->paginate(10);
 
         return view('livewire.list-student', [
             // passing data to view
