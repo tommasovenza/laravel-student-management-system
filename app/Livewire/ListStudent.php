@@ -60,7 +60,7 @@ class ListStudent extends Component
         $students = $this->applySearch($queryStudentsObj);
 
         // sorted by function applySort
-        $students = $this->applySort($queryStudentsObj);
+        $students = $this->applySort($students);
 
         // returning view
         return view('livewire.list-student', [
