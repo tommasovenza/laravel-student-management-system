@@ -20,6 +20,8 @@ class ListStudent extends Component
 
     public $direction = 'desc';
 
+    // with this function I was changing only the state of the properties
+    // with click handled by livewire on the blade list-student file
     public function sort($columnToSort)
     {
         if ($this->column === $columnToSort) {
@@ -50,7 +52,7 @@ class ListStudent extends Component
                 ->orWhere('email', 'like', '%' . $this->search . '%');
         });
 
-        // trying implementing an order/sortColumn function
+        // this is just a laravel function to make a query and sort
         $students->orderBy($this->column, $this->direction);
 
         // returning view
