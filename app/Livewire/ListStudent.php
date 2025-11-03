@@ -15,10 +15,14 @@ class ListStudent extends Component
     // Defining component State
     // search
     public string $search = '';
-
+    // default Column to Sort
     public string $columnToSort = 'id';
-
+    // default Sort Direction
     public string $sortDirection = 'desc';
+
+    // empty array to do some actions with livewire and alpine at checkbox click
+    public array $selectedStudentIds = [];
+
 
     // this function using $search change state to make a query and 
     // filter on fronted on user keyboard on input's search
@@ -78,5 +82,13 @@ class ListStudent extends Component
         $student->delete();
         // redirect
         return redirect()->route('students.index');
+    }
+
+    protected function queryString()
+    {
+        return [
+            'columnToSort',
+            'sortDirection'
+        ];
     }
 }

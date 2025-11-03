@@ -46,6 +46,11 @@
                                     <tr>
                                         <th scope="col"
                                             class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                            Action
+                                        </th>
+
+                                        <th scope="col"
+                                            class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
                                             <button wire:click="sortBy('id')">ID</button>
                                         </th>
                                         <th scope="col"
@@ -72,8 +77,21 @@
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-200 bg-white">
+                                <span x-text="$wire.selectedStudentIds.length"></span> 
+                                <span x-text="$wire.selectedStudentIds"></span> 
                                   @foreach ($students as $student)
                                     <tr>
+                                        <td class="flex justify-center items-center whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                                            {{-- Checkbox --}}
+                                            <input 
+                                                type=checkbox 
+                                                id="select-student-id" 
+                                                class="rounded" 
+                                                wire:model="selectedStudentIds" 
+                                                value="{{ $student->id }}"
+                                            >
+                                        </td>
+
                                         <td
                                             class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                                             {{ $student->id }}
