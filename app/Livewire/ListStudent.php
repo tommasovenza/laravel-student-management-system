@@ -84,6 +84,19 @@ class ListStudent extends Component
         return redirect()->route('students.index');
     }
 
+    public function deleteAll()
+    {
+        // foreach on all selected students
+        foreach ($this->selectedStudentIds as $id) {
+            // find resource to delete
+            $studentToDelete = Student::find($id);
+            // deleting
+            $studentToDelete->delete();
+        }
+        // return
+        return redirect()->route('students.index');
+    }
+
     protected function queryString()
     {
         return [

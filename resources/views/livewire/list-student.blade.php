@@ -46,7 +46,7 @@
 
                         {{-- Delete Button --}}
                         <div class="container-button  bg-gray-100 border rounded p-2">
-                            <button class="flex justify-items items-center gap-2">Delete
+                            <button class="flex justify-items items-center gap-2" wire:click="deleteAll('selectedStudentIds')">Delete
                             {{-- Icon Delete --}}
                             <svg 
                                 class="w-4 h-4 text-gray-400  00 dark:text-white" 
