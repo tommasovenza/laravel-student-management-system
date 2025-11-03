@@ -37,34 +37,36 @@
                 </div>
 
                 {{-- Hidden Area --}}
-                <div class="flex justify-items items-center gap-2">
-                    {{-- Selected Items --}}
-                    <div>
-                     <span x-text="$wire.selectedStudentIds.length"></span> Selected
-                    </div>
+                <div class="controls-area" x-data="{ open: false }">
+                    <div class="flex justify-items items-center gap-2" x-show="$wire.selectedStudentIds.length > 0"> 
+                        {{-- Selected Items --}}
+                        <div>
+                            <span x-text="$wire.selectedStudentIds.length"></span> Selected
+                        </div>
 
-                   {{-- Delete Button --}}
-                    <div class="container-button  bg-gray-100 border rounded p-2">
-                        <button class="flex justify-items items-center gap-2">Delete
-                        {{-- Icon Delete --}}
-                        <svg 
-                            class="w-4 h-4 text-gray-400  00 dark:text-white" 
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
-                            <path d="M19 0H1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1ZM2 6v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6H2Zm11 3a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V8a1 1 0 0 1 2 0h2a1 1 0 0 1 2 0v1Z"/>
-                        </svg>
-                        </button> 
-                    </div>
-                   
-                    <div class="container-button bg-gray-100 border rounded p-2">
-                        {{-- Export Button --}}
-                        <button class="flex justify-items items-center gap-2">Export
+                        {{-- Delete Button --}}
+                        <div class="container-button  bg-gray-100 border rounded p-2">
+                            <button class="flex justify-items items-center gap-2">Delete
+                            {{-- Icon Delete --}}
                             <svg 
-                                class="w-4 h-4 text-gray-400 dark:text-white" 
-                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 18">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 1v11m0 0 4-4m-4 4L4 8m11 4v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3"/>
+                                class="w-4 h-4 text-gray-400  00 dark:text-white" 
+                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
+                                <path d="M19 0H1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1ZM2 6v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6H2Zm11 3a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V8a1 1 0 0 1 2 0h2a1 1 0 0 1 2 0v1Z"/>
                             </svg>
-                        </button>
-                   </div>
+                            </button> 
+                        </div>
+                    
+                        <div class="container-button bg-gray-100 border rounded p-2">
+                            {{-- Export Button --}}
+                            <button class="flex justify-items items-center gap-2">Export
+                                <svg 
+                                    class="w-4 h-4 text-gray-400 dark:text-white" 
+                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 18">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 1v11m0 0 4-4m-4 4L4 8m11 4v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
   
@@ -117,7 +119,7 @@
                                                 type=checkbox 
                                                 id="select-student-id" 
                                                 class="rounded" 
-                                                wire:model="selectedStudentIds" 
+                                                wire:model.live="selectedStudentIds" 
                                                 value="{{ $student->id }}"
                                             >
                                         </td>
