@@ -5,9 +5,10 @@ namespace App\Livewire;
 use App\Models\Student;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Illuminate\Contracts\Database\Eloquent\Builder;
-use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\StudentExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Filament\Notifications\Notification;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class ListStudent extends Component
 {
@@ -95,6 +96,13 @@ class ListStudent extends Component
             // deleting
             $studentToDelete->delete();
         }
+
+        // send a notification to user through Filament
+        Notification::make()
+            ->title('Students Deleted successfully!')
+            ->success()
+            ->send();
+
         // return
         return redirect()->route('students.index');
     }
