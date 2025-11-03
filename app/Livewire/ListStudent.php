@@ -6,6 +6,8 @@ use App\Models\Student;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\StudentExport;
 
 class ListStudent extends Component
 {
@@ -103,5 +105,10 @@ class ListStudent extends Component
             'columnToSort',
             'sortDirection'
         ];
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new StudentExport($this->selectedStudentIds),  now() . '_student.xlsx');
     }
 }

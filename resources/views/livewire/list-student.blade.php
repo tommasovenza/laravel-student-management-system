@@ -58,7 +58,7 @@
                     
                         <div class="container-button bg-gray-100 border rounded p-2">
                             {{-- Export Button --}}
-                            <button class="flex justify-items items-center gap-2">Export
+                            <button class="flex justify-items items-center gap-2" wire:click="exportExcel">Export
                                 <svg 
                                     class="w-4 h-4 text-gray-400 dark:text-white" 
                                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 18">
@@ -110,7 +110,6 @@
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-200 bg-white">
-                                <span x-text="$wire.selectedStudentIds"></span> 
                                   @foreach ($students as $student)
                                     <tr>
                                         <td class="flex justify-center items-center whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
